@@ -39,6 +39,25 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
+    void DoFaceLeft (bool faceleft)
+    {
+        if ( faceleft == true )
+        {
+            transform.localRotation = Quaternion.Euler(0, 180, 0);
+        }
+        else
+        {
+            transform.localRotation = Quaternion.Euler(0, 0, 0);
+        }
+
+
+
+
+    }
+
+
+
+
     void DoMove()
     {
         Vector2 velocity = rb.velocity;
@@ -49,15 +68,29 @@ public class PlayerMovement : MonoBehaviour
         // check for moving left
         if (Input.GetKey("a"))
         {
-            velocity.x = -5;
+            velocity.x = -7;
         }
 
         // check for moving right
         if (Input.GetKey("d"))
         {
-            velocity.x = 5;
+            velocity.x = 7;
         }
         rb.velocity = velocity;
+
+        if(velocity.x < -0.5)
+        {
+            DoFaceLeft(true);
+        }
+        if (velocity.x > 0.5f)
+        {
+            DoFaceLeft(false);
+        }
+
+
+
+
+
     }
 
     private void OnCollisionStay2D(Collision2D collision)
