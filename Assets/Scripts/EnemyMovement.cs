@@ -16,28 +16,28 @@ public class EnemyMovement : MonoBehaviour
     }    
     void DoFaceLeft(bool faceleft)
     {
-      if (faceleft == true)
-      {
-        transform.localRotation = Quaternion.Euler(0, 180, 0);
-      }
-      else
-      {
-      transform.localRotation = Quaternion.Euler(0, 0, 0);
-      }
+       if (faceleft == true)
+       {
+         transform.localRotation = Quaternion.Euler(0, 180, 0);
+       }
+       else
+       {
+         transform.localRotation = Quaternion.Euler(0, 0, 0);
+       }
+
+
+
+
     }
     // Update is called once per frame
     void Update()
     {
 
-
-
-       
-        if (player.transform.position.x < -transform.position.x)
+        if (player.transform.position.x < transform.position.x)
         {
             DoFaceLeft(true);
         }
-
-        if (player.transform.position.x > transform.position.x)
+        else
         {
             DoFaceLeft(false);
         }
