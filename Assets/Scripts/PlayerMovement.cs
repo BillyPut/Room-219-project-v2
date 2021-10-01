@@ -21,7 +21,7 @@ public class PlayerMovement : MonoBehaviour
         DoJump();
         DoMove();
         if (isGrounded == false)
-        {
+        {                      
             anim.SetBool("Jump", true);
         }
         else
