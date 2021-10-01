@@ -6,10 +6,12 @@ public class PlayerMovement : MonoBehaviour
 {
     private Rigidbody2D rb;
     private bool isGrounded;
+    private Animator anim;
 
     // Start is called before the first frame update
     void Start()
     {
+        anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
     }
 
@@ -18,6 +20,14 @@ public class PlayerMovement : MonoBehaviour
     {
         DoJump();
         DoMove();
+        if (isGrounded == false)
+        {
+            anim.SetBool("Jump", true);
+        }
+        else
+        {
+            anim.SetBool("Jump", false);
+        }
 
     }
 
@@ -30,10 +40,15 @@ public class PlayerMovement : MonoBehaviour
         {
             if (velocity.y < 0.01f)
             {
-                velocity.y = 10f;    // give the player a velocity of 5 in the y axis
-
+                velocity.y = 10f;   
+                
             }
+
+           
         }
+       
+       
+
 
         rb.velocity = velocity;
 
@@ -76,7 +91,22 @@ public class PlayerMovement : MonoBehaviour
         {
             velocity.x = 7;
         }
+
+        if (velocity.x > 0 || velocity.x < 0)
+        {
+            anim.SetBool("Walk", true);
+        }
+        else
+        {
+            anim.SetBool("Walk", false);
+        }
+
+    
+
+
         rb.velocity = velocity;
+
+
 
         if(velocity.x < -0.5)
         {
