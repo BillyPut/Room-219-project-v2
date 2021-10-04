@@ -7,6 +7,7 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D rb;
     private bool isGrounded;
     private Animator anim;
+    public GameObject projectile;
 
     // Start is called before the first frame update
     void Start()
@@ -29,6 +30,17 @@ public class PlayerMovement : MonoBehaviour
             anim.SetBool("Jump", false);
         }
 
+        if (Input.GetKey("z")
+        {
+            clone = Instantiate(projectile, transform.position, transform.rotation);
+
+        }
+
+
+
+
+
+
     }
 
     void DoJump()
@@ -40,7 +52,7 @@ public class PlayerMovement : MonoBehaviour
         {
             if (velocity.y < 0.01f)
             {
-                velocity.y = 10f;   
+                velocity.y = 12f;   
                 
             }
 
@@ -54,23 +66,7 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
-    void DoFaceLeft (bool faceleft)
-    {
-        if ( faceleft == true )
-        {
-            transform.localRotation = Quaternion.Euler(0, 180, 0);
-        }
-        else
-        {
-            transform.localRotation = Quaternion.Euler(0, 0, 0);
-        }
-
-
-
-
-    }
-
-
+    
 
 
     void DoMove()
@@ -108,13 +104,13 @@ public class PlayerMovement : MonoBehaviour
 
 
 
-        if(velocity.x < -0.5)
+        if (velocity.x < -0.5)
         {
-            DoFaceLeft(true);
+            Helper.FlipSprite(gameObject, true);
         }
         if (velocity.x > 0.5f)
         {
-            DoFaceLeft(false);
+            Helper.FlipSprite(gameObject, false);
         }
 
 
