@@ -8,13 +8,17 @@ public class PlayerMovement : MonoBehaviour
     private bool isGrounded;
     private Animator anim;
     public GameObject projectile;
+    
 
     // Start is called before the first frame update
     void Start()
     {
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
+     
     }
+
+
 
     // Update is called once per frame
     void Update()
@@ -30,12 +34,14 @@ public class PlayerMovement : MonoBehaviour
             anim.SetBool("Jump", false);
         }
 
-        if (Input.GetKey("z")
+
+        if (Input.GetKey("z"))
         {
-            clone = Instantiate(projectile, transform.position, transform.rotation);
+           
+            projectile = Instantiate(projectile, transform.position, transform.rotation);
+            projectile.GetComponent<Rigidbody>().AddForce(transform.forward * 10f);
 
         }
-
 
 
 
