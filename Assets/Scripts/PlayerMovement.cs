@@ -7,7 +7,7 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D rb;
     private bool isGrounded;
     private Animator anim;
-    public GameObject projectile;
+    public GameObject projectilePrefab;
     
 
     // Start is called before the first frame update
@@ -35,13 +35,6 @@ public class PlayerMovement : MonoBehaviour
         }
 
 
-        if (Input.GetKey("z"))
-        {
-           
-            projectile = Instantiate(projectile, transform.position, transform.rotation);
-            projectile.GetComponent<Rigidbody>().AddForce(transform.forward * 10f);
-
-        }
 
 
 
@@ -119,7 +112,10 @@ public class PlayerMovement : MonoBehaviour
             Helper.FlipSprite(gameObject, false);
         }
 
-
+        if (Input.GetKeyDown(KeyCode.Space) )
+        {
+            Instantiate(projectilePrefab, transform.position, projectilePrefab.transform.rotation);
+        }
 
 
 
