@@ -4,11 +4,7 @@ using UnityEngine;
 
 public class BulletMovement : MonoBehaviour
 {
-    private void FixedUpdate()
-    {
-        transform.position = new Vector2(transform.position.x + 4f, transform.position.y);
-    }
-
+   
 
 
     // Start is called before the first frame update

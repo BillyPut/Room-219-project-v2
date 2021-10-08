@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static Globals;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -8,7 +9,8 @@ public class PlayerMovement : MonoBehaviour
     private bool isGrounded;
     private Animator anim;
     public GameObject projectilePrefab;
-    
+   
+
 
     // Start is called before the first frame update
     void Start()
@@ -105,19 +107,26 @@ public class PlayerMovement : MonoBehaviour
 
         if (velocity.x < -0.5)
         {
-            Helper.FlipSprite(gameObject, true);
+            Helper.FlipSprite(gameObject, Left);
         }
         if (velocity.x > 0.5f)
         {
-            Helper.FlipSprite(gameObject, false);
+            Helper.FlipSprite(gameObject, Right);
         }
 
-        if (Input.GetKeyDown(KeyCode.Space) )
+
+
+
+
+        if (Input.GetKeyDown("z") && (transform.rotation.x == 0) )
         {
-            Instantiate(projectilePrefab, transform.position, projectilePrefab.transform.rotation);
+            Helper.MakeBullet(projectilePrefab, transform.position.x + 8, transform.position.y + 5, 50.0f, 0);
+
         }
-
-
+        if (Input.GetKeyDown("z") && (transform.rotation.x > 0) )
+        {
+            Helper.MakeBullet(projectilePrefab, transform.position.x - 8, transform.position.y + 5, -50.0f, 0);
+        }
 
     }
 

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static Globals;
 
 public class EnemyMovement : MonoBehaviour
 {
@@ -27,11 +28,11 @@ public class EnemyMovement : MonoBehaviour
         
         if (dist > 3)
         {
-            Helper.FlipSprite(gameObject, true);
+            Helper.FlipSprite(gameObject, Left);
         }
         if (dist < -3)
         {
-            Helper.FlipSprite(gameObject, false);
+            Helper.FlipSprite(gameObject, Right);
         }
 
         
@@ -45,20 +46,36 @@ public class EnemyMovement : MonoBehaviour
             anim.SetBool("Attack", false);
         }
 
-
-        Helper.FacePlayer(player, gameObject);
-
+        //  Helper.FacePlayer(player, gameObject);
 
 
+       
 
 
 
     }
-
+    
+   
     void SayHello()
     {
         print("Hello");
     }
+
+
+    void OnCollisionEnter2D(Collision2D col)
+    {
+        print("tag=" + col.gameObject.tag);
+
+        if (col.gameObject.tag == "Bullet")
+        {
+            print("I've been hit by a bullet!");
+
+        }
+    }
+
+
+
+
 
 
 
