@@ -9,7 +9,8 @@ public class PlayerMovement : MonoBehaviour
     private bool isGrounded;
     private Animator anim;
     public GameObject projectilePrefab;
-   
+
+
 
 
     // Start is called before the first frame update
@@ -17,6 +18,7 @@ public class PlayerMovement : MonoBehaviour
     {
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
+        
      
     }
 
@@ -37,7 +39,8 @@ public class PlayerMovement : MonoBehaviour
         }
 
 
-
+        bool result = Helper.DoRayCollisionCheck(gameObject);
+        print("result =" + result);
 
 
 
@@ -59,11 +62,13 @@ public class PlayerMovement : MonoBehaviour
 
            
         }
-       
-       
 
 
-        rb.velocity = velocity;
+
+
+        Helper.SetVelocity(velocity.x, velocity.y, gameObject);
+
+    
 
     }
 
@@ -98,10 +103,10 @@ public class PlayerMovement : MonoBehaviour
             anim.SetBool("Walk", false);
         }
 
-    
 
 
-        rb.velocity = velocity;
+
+        Helper.SetVelocity(velocity.x, velocity.y, gameObject);
 
 
 
@@ -128,6 +133,11 @@ public class PlayerMovement : MonoBehaviour
             Helper.MakeBullet(projectilePrefab, transform.position.x - 8, transform.position.y + 5, -50.0f, 0);
         }
 
+
+        
+
+
+
     }
 
     private void OnCollisionStay2D(Collision2D collision)
@@ -141,7 +151,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
 
-
+   
 
 
 
