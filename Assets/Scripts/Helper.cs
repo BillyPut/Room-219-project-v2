@@ -80,7 +80,7 @@ public class Helper : MonoBehaviour
 
         //cast a ray downward of length 1
         RaycastHit2D hit = Physics2D.Raycast( new Vector3(x,y,obj.transform.position.z), -Vector2.up, rayLength);
-
+        
         Color hitColor = Color.white;
 
 
@@ -90,7 +90,7 @@ public class Helper : MonoBehaviour
             
             if (hit.collider.tag == "Platforms")
             {
-                print("Player has collided with Ground");
+                
                 hitColor = Color.green;
                 return true;
             }

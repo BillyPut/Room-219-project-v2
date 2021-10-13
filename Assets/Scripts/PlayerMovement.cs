@@ -9,7 +9,7 @@ public class PlayerMovement : MonoBehaviour
     private bool isGrounded;
     private Animator anim;
     public GameObject projectilePrefab;
-
+    
 
 
 
@@ -27,9 +27,12 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        bool result = Helper.DoRayCollisionCheck(gameObject);
+
         DoJump();
         DoMove();
-        if (isGrounded == false)
+        if (result == false)
         {                      
             anim.SetBool("Jump", true);
         }
@@ -39,8 +42,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
 
-        bool result = Helper.DoRayCollisionCheck(gameObject);
-        print("result =" + result);
+        
 
 
 
@@ -49,10 +51,12 @@ public class PlayerMovement : MonoBehaviour
 
     void DoJump()
     {
+
+        bool result = Helper.DoRayCollisionCheck(gameObject);
         Vector2 velocity = rb.velocity;
 
         // check for jump
-        if (Input.GetKey("w") && (isGrounded == true) )
+        if (Input.GetKey("w") && (result == true) )
         {
             if (velocity.y < 0.01f)
             {
@@ -69,7 +73,7 @@ public class PlayerMovement : MonoBehaviour
         Helper.SetVelocity(velocity.x, velocity.y, gameObject);
 
     
-
+        
     }
 
     
@@ -140,16 +144,7 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
-    private void OnCollisionStay2D(Collision2D collision)
-    {
-        isGrounded = true;
-    }
-
-    private void OnCollisionExit2D(Collision2D collision)
-    {
-        isGrounded = false;
-    }
-
+   
 
    
 
