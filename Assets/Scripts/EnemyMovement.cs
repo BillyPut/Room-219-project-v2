@@ -10,6 +10,8 @@ public class EnemyMovement : MonoBehaviour
     public float enemySpeed;
     private Animator anim;
     public float timeRemaining = 10;
+    private bool movingRight = true;
+    public Transform groundDetection;
 
     // Start is called before the first frame update
     void Start()
@@ -21,21 +23,13 @@ public class EnemyMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        DoMoveEnemy();
+     
         
         float ex = transform.position.x;
         float px = player.transform.position.x;
 
         float dist = ex - px;
         
-        if (dist > 3)
-        {
-            Helper.FlipSprite(gameObject, Left);
-        }
-        if (dist < -3)
-        {
-            Helper.FlipSprite(gameObject, Right);
-        }
 
         
 
@@ -50,49 +44,28 @@ public class EnemyMovement : MonoBehaviour
 
         //  Helper.FacePlayer(player, gameObject);
 
-    
 
+        transform.Translate(Vector2.right * enemySpeed * Time.deltaTime);
+        RaycastHit2D groundInfo = Physics2D.Raycast(groundDetection.position, Vector2.down, 7f);
+        if (groundInfo.collider == false)
+        {
+            if (movingRight == true)
+            {
+                transform.eulerAngles = new Vector3(0, -180, 0);
+                movingRight = false;
+            }
+            else
+            {
+                transform.eulerAngles = new Vector3(0, 0, 0);
+                movingRight = true;
+            }
+        }
 
 
 
     }
 
-    void DoMoveEnemy()
-    {
-        bool result = Helper.DoRayCollisionCheck(gameObject);
-        Vector2 velocity = rb.velocity;
-        velocity.x = 0;
-
-        if (timeRemaining > 0)
-        {
-            timeRemaining -= Time.deltaTime;
-        }
-        if (timeRemaining < 2) 
-        {
-            velocity.x = -5f;
-           
-            
-        }
-        if (result == false)
-        {
-            timeRemaining = 10;
-            velocity.x = 200f;
-
-
-
-        }
-
-
-
-        if (timeRemaining < 1)
-        {
-            timeRemaining = 10;
-        }
-
-        
-      
-        Helper.SetVelocity(velocity.x, 0, gameObject);
-    }
+   
     
    
     void SayHello()
