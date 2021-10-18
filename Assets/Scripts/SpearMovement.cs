@@ -2,11 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BulletMovement : MonoBehaviour
+public class SpearMovement : MonoBehaviour
 {
-   
-
-
     // Start is called before the first frame update
     void Start()
     {
@@ -17,30 +14,23 @@ public class BulletMovement : MonoBehaviour
     void Update()
     {
         
-
-
-
     }
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.tag == "Enemies")
+
+        if (other.gameObject.tag == "Player")
         {
             Destroy(gameObject);
         }
-        if (other.gameObject.tag == "Platforms")
-        {
-            Destroy(gameObject);
-        }
+
+
     }
 
 
 
+
+
 }
-
-
-
-
-
 
 

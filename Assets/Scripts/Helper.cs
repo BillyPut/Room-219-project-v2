@@ -93,7 +93,9 @@ public class Helper : MonoBehaviour
                 
                 hitColor = Color.green;
                 return true;
+
             }
+       
         }
 
         Debug.DrawRay(new Vector3(x, y, obj.transform.position.z), -Vector2.up * rayLength, hitColor);

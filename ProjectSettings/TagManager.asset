@@ -4,9 +4,11 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Enemy
   - Bullet
   - Platforms
+  - Collectibles
+  - Enemies
+  - Enemyprojectile
   layers:
   - Default
   - TransparentFX

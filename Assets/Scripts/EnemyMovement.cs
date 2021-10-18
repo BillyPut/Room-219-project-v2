@@ -5,25 +5,26 @@ using static Globals;
 
 public class EnemyMovement : MonoBehaviour
 {
-    private Rigidbody2D rb;
+    
     public GameObject player;
     public float enemySpeed;
     private Animator anim;
     public float timeRemaining = 10;
     private bool movingRight = true;
     public Transform groundDetection;
+    public GameObject projectileSpear;
 
     // Start is called before the first frame update
     void Start()
     {
         anim = GetComponent<Animator>();
-        rb = GetComponent<Rigidbody2D>();
+        
     }    
  
     // Update is called once per frame
     void Update()
     {
-     
+
         
         float ex = transform.position.x;
         float px = player.transform.position.x;
@@ -36,10 +37,13 @@ public class EnemyMovement : MonoBehaviour
         if (dist < 20 && dist > -20)
         {
             anim.SetBool("Attack", true);
+            enemySpeed = 0;
+            transform.localRotation = Quaternion.Euler(0, 180, 0);
         }
         else
         {
             anim.SetBool("Attack", false);
+            enemySpeed = 7;
         }
 
         //  Helper.FacePlayer(player, gameObject);
@@ -68,9 +72,23 @@ public class EnemyMovement : MonoBehaviour
    
     
    
-    void SayHello()
+    void SpearThrow()
     {
-        print("Hello");
+
+        float ex = transform.position.x;
+        float px = player.transform.position.x;
+
+        float dist = ex - px;
+
+        if (dist < (20) && (dist > 0) )
+        {
+            Helper.MakeBullet(projectileSpear, transform.position.x - 8, transform.position.y + 5, -50.0f, 0);
+
+        }
+        if (dist > (-20) && (dist < 0))
+        {
+            Helper.MakeBullet(projectileSpear, transform.position.x + 8, transform.position.y + 5, 50.0f, 0);
+        }
     }
 
 
@@ -85,7 +103,16 @@ public class EnemyMovement : MonoBehaviour
         }
     }
 
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        
+        if (other.gameObject.tag == "Bullet")
+        {
+            Destroy(gameObject);
+        }
 
+
+    }
 
 
 

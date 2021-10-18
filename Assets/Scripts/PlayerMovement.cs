@@ -9,6 +9,8 @@ public class PlayerMovement : MonoBehaviour
     private bool isGrounded;
     private Animator anim;
     public GameObject projectilePrefab;
+    public float health = 3;
+    
     
 
 
@@ -32,6 +34,8 @@ public class PlayerMovement : MonoBehaviour
 
         DoJump();
         DoMove();
+        
+
         if (result == false)
         {                      
             anim.SetBool("Jump", true);
@@ -41,9 +45,7 @@ public class PlayerMovement : MonoBehaviour
             anim.SetBool("Jump", false);
         }
 
-
         
-
 
 
 
@@ -60,7 +62,7 @@ public class PlayerMovement : MonoBehaviour
         {
             if (velocity.y < 0.01f)
             {
-                velocity.y = 12f;   
+                velocity.y = 15f;   
                 
             }
 
@@ -137,18 +139,30 @@ public class PlayerMovement : MonoBehaviour
             Helper.MakeBullet(projectilePrefab, transform.position.x - 8, transform.position.y + 5, -50.0f, 0);
         }
 
-
+        
         
 
 
 
     }
 
-   
 
-   
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.tag == "Collectibles")
+        {
+            health = health + 1;
+        }
+        if (other.gameObject.tag == "Enemyprojectile")
+        {
+            health = health - 1;
+        }
 
-
+    }
 
     
+
+
+
+
 }
