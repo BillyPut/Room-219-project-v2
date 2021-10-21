@@ -23,6 +23,10 @@ public class SpearMovement : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        if (other.gameObject.tag == "Platforms")
+        {
+            Destroy(gameObject);
+        }
 
 
     }
