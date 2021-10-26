@@ -100,7 +100,7 @@ public class PlayerMovement : MonoBehaviour
             velocity.x = 7;
         }
 
-        if (velocity.x > 0 || velocity.x < 0)
+        if (velocity.x > -0.1 || velocity.x < 0.1)
         {
             anim.SetBool("Walk", true);
         }
