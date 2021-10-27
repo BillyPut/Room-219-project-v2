@@ -54,7 +54,7 @@ public class HeroMovement : MonoBehaviour
         {
             if (velocity.y < 0.01f)
             {
-                velocity.y = 8f;
+                velocity.y = 10f;
 
             }
 
