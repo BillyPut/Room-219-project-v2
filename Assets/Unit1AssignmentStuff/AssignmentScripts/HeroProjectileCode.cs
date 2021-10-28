@@ -15,4 +15,22 @@ public class HeroProjectileCode : MonoBehaviour
     {
         
     }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.tag == "Enemies")
+        {
+            Destroy(gameObject);
+        }
+        if (other.gameObject.tag == "Platforms")
+        {
+            Destroy(gameObject);
+        }
+
+
+
+
+
+    }
+
 }

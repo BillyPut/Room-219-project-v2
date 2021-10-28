@@ -35,8 +35,17 @@ public class HeroMovement : MonoBehaviour
         DoJump();
         DoMove();
 
+        if (Input.GetKey("z"))
+        {
+            anim.SetBool("BulletAttack", true);
+        }
+        else
+        {
+            anim.SetBool("BulletAttack", false);
+        }
 
-   
+
+
 
 
 
@@ -134,22 +143,42 @@ public class HeroMovement : MonoBehaviour
             Helper.FlipSprite(gameObject, Right);
         }
 
-
-
-
-
      
+    }
 
+    void BulletAttack()
+    {
+        if (transform.rotation.x == 0)
+        {
+            Helper.MakeBullet(projectilePrefab, transform.position.x + 1.5f, transform.position.y + 0.5f, 10.0f, 0);
 
+        }
+        if (transform.rotation.x > 0)
+        {
+            Helper.MakeBullet(projectilePrefab, transform.position.x - 1.5f, transform.position.y + 0.5f, -10.0f, 0);
+        }
 
 
 
 
     }
 
+   
 
-    
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.tag == "Collectibles")
+        {
+            health = health + 1;
+        }
+        if (other.gameObject.tag == "Enemyprojectile")
+        {
+            
+            health = health - 1;
+        }
+       
 
+    }
 
 
 

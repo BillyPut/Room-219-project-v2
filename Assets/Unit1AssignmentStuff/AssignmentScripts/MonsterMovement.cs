@@ -13,6 +13,7 @@ public class MonsterMovement : MonoBehaviour
     private bool movingRight = true;
     public Transform groundDetection;
     public GameObject projectileAttack;
+    public float health = 3;
 
     // Start is called before the first frame update
     void Start()
@@ -24,17 +25,23 @@ public class MonsterMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if (health == 0)
+        {
+            Destroy(gameObject);
+        }
 
         float ex = transform.position.x;
         float px = player.transform.position.x;
+        float ey = transform.position.y;
+        float py = player.transform.position.y;
 
         float dist = ex - px;
+        float disty = ey - py;
 
 
 
 
-        if (dist < 10 && dist > -10)
+        if (dist < 10 && dist > -10 && disty < 5 && disty > -5)
         {
             anim.SetBool("Attack", true);
             enemySpeed = 0;
@@ -77,18 +84,26 @@ public class MonsterMovement : MonoBehaviour
 
         float ex = transform.position.x;
         float px = player.transform.position.x;
+        float ey = transform.position.y;
+        float py = player.transform.position.y;
 
         float dist = ex - px;
+        float disty = ey - py;
 
-        if (dist < (10) && (dist > 0))
+        if (dist < 10 && dist > 0 && disty < 5 && disty > -5)
         {
             Helper.MakeBullet(projectileAttack, transform.position.x - 1.5f, transform.position.y + 0.5f, -10.0f, 0);
 
         }
-        if (dist > (-10) && (dist < 0))
+        if (dist > -10 && dist < 0 && disty < 5 && disty > -5)
         {
             Helper.MakeBullet(projectileAttack, transform.position.x + 1.5f, transform.position.y + 0.5f, 10.0f, 0);
         }
+    }
+
+    void HitEnd()
+    {
+        anim.SetBool("Hit", false);
     }
 
 
@@ -108,7 +123,16 @@ public class MonsterMovement : MonoBehaviour
 
         if (other.gameObject.tag == "Bullet")
         {
-            Destroy(gameObject);
+
+            anim.SetBool("Hit", true);
+            health = health - 1;
+            
+           
+        }
+        else
+        {
+            anim.SetBool("Hit", false);
+            
         }
 
 
