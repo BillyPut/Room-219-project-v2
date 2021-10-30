@@ -176,7 +176,12 @@ public class HeroMovement : MonoBehaviour
             
             health = health - 1;
         }
-       
+        if (other.gameObject.tag == "Chests")
+        {
+
+            health = health + 3;
+        }
+
 
     }
 
