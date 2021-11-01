@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using static Globals;
+using UnityEngine.SceneManagement;
 
 public class HeroMovement : MonoBehaviour
 {
@@ -44,7 +45,10 @@ public class HeroMovement : MonoBehaviour
             anim.SetBool("BulletAttack", false);
         }
 
-
+        if (health == 0)
+        {
+            SceneManager.LoadScene("Unit1AssignmentScene");
+        }
 
 
 
