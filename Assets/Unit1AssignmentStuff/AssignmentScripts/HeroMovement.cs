@@ -185,6 +185,10 @@ public class HeroMovement : MonoBehaviour
 
             health = health + 3;
         }
+        if (other.gameObject.tag == "Door")
+        {
+            SceneManager.LoadScene("Unit1AssignmentScene");
+        }
 
 
     }

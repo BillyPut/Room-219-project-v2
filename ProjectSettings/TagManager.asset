@@ -10,6 +10,7 @@ TagManager:
   - Enemies
   - Enemyprojectile
   - Chests
+  - Door
   layers:
   - Default
   - TransparentFX
