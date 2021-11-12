@@ -67,14 +67,14 @@ public class HeroMovement : MonoBehaviour
         {
             if (velocity.y < 0.01f)
             {
-                velocity.y = 10f;
+                velocity.y = 11f;
 
             }
 
 
         }
 
-        if (velocity.y > 0.1)
+        if (velocity.y > 0.5)
         {
             anim.SetBool("Jump", true);
         }
